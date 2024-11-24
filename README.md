@@ -39,13 +39,13 @@ mvn test
 # Executar teste em grupo
 
 ```bash
-mvn test -Dgroups="createOrder"
+mvn test -Dgroups="grupo"
 ```
 
 # Executar teste pelo método da classe de teste
 
 ```bash
-mvn test -Dtest=PetTest#updatePet
+mvn test -Dtest=Classe#metodo
 ```
 
 # Executar testes pelo testng.xml
