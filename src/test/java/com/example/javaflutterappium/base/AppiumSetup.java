@@ -20,6 +20,7 @@ public class AppiumSetup {
         try {
 //            Properties prop = loadProperties(getResourcePath("appium_config.properties"));
             String configFile = System.getProperty("appium.config.file", "src/test/resources/appium_config.properties");
+            System.out.println("Arquivo de configuração usado: " + configFile);
             Properties prop = loadProperties(configFile);
             String getAppPath = getResourcePath(prop.getProperty("app"));
             DesiredCapabilities capabilities = new DesiredCapabilities();
