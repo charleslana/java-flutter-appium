@@ -33,6 +33,20 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>prod</id>
+      <properties>
+        <appium.config.file>src/test/resources/appium_config_prod.properties</appium.config.file>
+      </properties>
+    </profile>
+    <profile>
+      <id>dev</id>
+      <properties>
+        <appium.config.file>src/test/resources/appium_config_dev.properties</appium.config.file>
+      </properties>
+    </profile>
+  </profiles>
   <dependencies>
     <dependency>
         <groupId>io.appium</groupId>

@@ -5,6 +5,8 @@ on:
 
 jobs:
   mobile_test:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
 
     steps:
@@ -67,7 +69,7 @@ jobs:
           profile: pixel_6
           script: |
             adb install src/test/resources/app-debug.apk
-            mvn test
+            mvn test -Pprod
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
@@ -75,3 +77,25 @@ jobs:
         with:
           name: reports
           path: reports
+
+      - name: Upload Extent Report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+            name: extent-report
+            path: src/test/resources/reports
+
+      - name: Prepare Extent Report for GitHub Pages
+        run: |
+          mkdir -p public
+          report_file=$(find src/test/resources/reports -name "*.html" | head -n 1)
+          cp "$report_file" public/index.html
+
+      - name: Deploy to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            publish_dir: ./public
+            publish_branch: gh-pages
+            force_orphan: true

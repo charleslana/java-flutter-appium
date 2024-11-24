@@ -1,12 +1,15 @@
 package com.example.javaflutterappium.tests;
 
+import com.example.javaflutterappium.ExtentReportManager;
 import com.example.javaflutterappium.base.AppiumSetup;
 import com.example.javaflutterappium.page.HomePage;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners(ExtentReportManager.class)
 public class AutomationTest {
     private RemoteWebDriver appiumDriver;
     private HomePage homePage;

@@ -18,7 +18,9 @@ public class AppiumSetup {
 
     public RemoteWebDriver initializeDriver() {
         try {
-            Properties prop = loadProperties(getResourcePath("appium_config.properties"));
+//            Properties prop = loadProperties(getResourcePath("appium_config.properties"));
+            String configFile = System.getProperty("appium.config.file", "src/test/resources/appium_config.properties");
+            Properties prop = loadProperties(configFile);
             String getAppPath = getResourcePath(prop.getProperty("app"));
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("appium:deviceName", prop.getProperty("deviceName"));
@@ -29,8 +31,7 @@ public class AppiumSetup {
             capabilities.setCapability("appium:appPackage", prop.getProperty("appPackage"));
             capabilities.setCapability("appium:appActivity", prop.getProperty("mainActivity"));
             capabilities.setCapability("appium:automationName", prop.getProperty("automationName"));
-            String url = "http://127.0.0.1:4723/wd/hub";
-            driver = new AndroidDriver((new URI(url)).toURL(), capabilities);
+            driver = new AndroidDriver((new URI(prop.getProperty("remoteUrl"))).toURL(), capabilities);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         } catch (MalformedURLException | URISyntaxException e) {
             System.err.println("Erro ao inicializar o driver Appium: " + e.getMessage());

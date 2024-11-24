@@ -54,13 +54,20 @@ mvn test -Dtest=Classe#metodo
 mvn test -DsuiteXmlFile=testng.xml
 ```
 
+# Executar testes de produção
+
+```bash
+mvn test -Pprod
+```
+# Executar testes de dev
+
+```bash
+mvn test -Pdev
+```
+
 # Listar emuladores
 
 ```bash
 emulator -list-avds
 ```
-
-# Relatórios
-
-### Execução dos testes
 
